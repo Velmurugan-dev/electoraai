@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, User } from 'lucide-react';
+import { Search, Bell, User, Menu, Filter, ChevronDown } from 'lucide-react';
 import { narrativesData, strategiesData } from '../data/neutralizerData';
 
-const CampaignNeutralizer = () => {
+const CampaignNeutralizer = ({ isMobile, onMenuToggle }) => {
   const [selectedNarrative, setSelectedNarrative] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [filteredNarratives, setFilteredNarratives] = useState(narrativesData);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
+  const [showMobileStrategy, setShowMobileStrategy] = useState(false);
 
   useEffect(() => {
     let filtered = narrativesData;
@@ -41,10 +43,16 @@ const CampaignNeutralizer = () => {
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
+    if (isMobile) {
+      setShowMobileFilters(false);
+    }
   };
 
   const handleNarrativeSelect = (narrative) => {
     setSelectedNarrative(narrative);
+    if (isMobile) {
+      setShowMobileStrategy(true);
+    }
   };
 
   const handleAction = (action, narrativeId) => {
@@ -83,7 +91,15 @@ const CampaignNeutralizer = () => {
 
     const message = actions[action]?.[narrativeId];
     if (message) {
-      alert(`${action === 'deploy' ? 'Strategy Deployed Successfully! 🚀' : action === 'approve' ? 'Strategy Approved & Scheduled! ✅' : 'Opening Strategy Editor... 🎨'}\n\n${message}\n\n${action === 'deploy' ? 'Data-driven deployment based on actual AIADMK sentiment analysis.' : action === 'approve' ? 'Implementation begins within 2 hours with measurable KPIs.' : 'Customize based on real-time sentiment shifts and platform performance.'}`);
+      const title = action === 'deploy' ? 'Strategy Deployed Successfully! 🚀' : 
+                   action === 'approve' ? 'Strategy Approved & Scheduled! ✅' : 
+                   'Opening Strategy Editor... 🎨';
+      
+      const footer = action === 'deploy' ? 'Data-driven deployment based on actual AIADMK sentiment analysis.' :
+                    action === 'approve' ? 'Implementation begins within 2 hours with measurable KPIs.' :
+                    'Customize based on real-time sentiment shifts and platform performance.';
+      
+      alert(`${title}\n\n${message}\n\n${footer}`);
     }
   };
 
@@ -105,40 +121,79 @@ const CampaignNeutralizer = () => {
 
   return (
     <div className="neutralizer-container">
-      {/* Header */}
+      {/* Unified Header for All Devices */}
       <div className="neutralizer-header">
-        <div className="header-content">
-          <div className="header-left">
-            <div className="header-brand">
-              <h1 className="header-title">ELECTORA</h1>
-              <span className="region-badge">TAMIL NADU</span>
+        <div className="header-content-wrapper">
+          {/* Top Header Bar */}
+          <div className="header-top">
+            <div className="header-left">
+              {isMobile && (
+                <button className="mobile-menu-btn" onClick={onMenuToggle}>
+                  <Menu size={24} />
+                </button>
+              )}
+              <div className="brand-section">
+                <h1 className="header-brand-title">ELECTORA</h1>
+                <span className="region-badge">TAMIL NADU</span>
+              </div>
+              <div className="date-info">
+                <span>📅</span>
+                <span>{new Date().toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  month: 'long', 
+                  day: 'numeric', 
+                  year: 'numeric' 
+                })}</span>
+              </div>
             </div>
-            <div className="date-info">
-              <span>📅</span>
-              <span>Wednesday, May 28, 2025</span>
+            
+            <div className="header-right">
+              {isMobile && (
+                <button 
+                  className="filter-toggle-btn"
+                  onClick={() => setShowMobileFilters(!showMobileFilters)}
+                >
+                  <Filter size={20} />
+                </button>
+              )}
+              <button className="notification-btn">
+                <Bell size={20} />
+              </button>
+              <div className="user-avatar">
+                <User size={20} />
+              </div>
             </div>
           </div>
-          <div className="header-right">
-            <button className="notification-icon">
-              <Bell size={20} />
-            </button>
-            <div className="user-avatar">
-              <User size={20} />
-            </div>
+  
+          {/* Page Title Section */}
+          <div className="page-header-section">
+            <h2 className="page-main-title">Negative Campaign Neutralizer</h2>
+            <p className="page-description">AI-powered content strategy to counter opposition narratives with data-driven messaging for AIADMK growth</p>
           </div>
         </div>
       </div>
+  
+      {/* Mobile Filters Dropdown */}
+      {isMobile && showMobileFilters && (
+        <div className="mobile-filters-overlay">
+          <div className="mobile-filters-content">
+            {['all', 'policy', 'character', 'coalition'].map(filter => (
+              <button
+                key={filter}
+                className={`mobile-filter-option ${activeFilter === filter ? 'active' : ''}`}
+                onClick={() => handleFilterChange(filter)}
+              >
+                {filter === 'all' ? 'All Categories' : filter.charAt(0).toUpperCase() + filter.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}  
 
-      {/* Page Header */}
-      <div className="page-header">
-        <h1 className="page-title">Negative Campaign Neutralizer</h1>
-        <p className="page-subtitle">AI-powered content strategy to counter opposition narratives with data-driven messaging for AIADMK growth</p>
-      </div>
-
-      {/* Main Content Grid */}
-      <div className="content-grid">
+      {/* Main Content */}
+      <div className={`content-grid ${isMobile ? 'mobile' : 'desktop'}`}>
         {/* Opposition Narratives Panel */}
-        <div className="opposition-panel">
+        <div className={`opposition-panel ${isMobile && showMobileStrategy ? 'hidden-mobile' : ''}`}>
           <div className="panel-header">
             <h2 className="panel-title">Opposition Narratives</h2>
             <div className="search-container">
@@ -153,17 +208,20 @@ const CampaignNeutralizer = () => {
             </div>
           </div>
 
-          <div className="filter-tabs">
-            {['all', 'policy', 'character', 'coalition'].map(filter => (
-              <button
-                key={filter}
-                className={`filter-tab ${activeFilter === filter ? 'active' : ''}`}
-                onClick={() => handleFilterChange(filter)}
-              >
-                {filter === 'all' ? 'All Categories' : filter.charAt(0).toUpperCase() + filter.slice(1)}
-              </button>
-            ))}
-          </div>
+          {/* Desktop Filter Tabs */}
+          {!isMobile && (
+            <div className="filter-tabs">
+              {['all', 'policy', 'character', 'coalition'].map(filter => (
+                <button
+                  key={filter}
+                  className={`filter-tab ${activeFilter === filter ? 'active' : ''}`}
+                  onClick={() => handleFilterChange(filter)}
+                >
+                  {filter === 'all' ? 'All Categories' : filter.charAt(0).toUpperCase() + filter.slice(1)}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="narratives-container">
             {filteredNarratives.map(narrative => (
@@ -173,7 +231,7 @@ const CampaignNeutralizer = () => {
                 onClick={() => handleNarrativeSelect(narrative)}
               >
                 <div className="narrative-title">
-                  {narrative.title}
+                  <span className="title-text">{narrative.title}</span>
                   <span className={`category-tag ${getCategoryClass(narrative.category)}`}>
                     {narrative.category}
                   </span>
@@ -195,10 +253,22 @@ const CampaignNeutralizer = () => {
         </div>
 
         {/* Counter-Narrative Generator Panel */}
-        <div className="counter-panel">
+        <div className={`counter-panel ${isMobile && !showMobileStrategy ? 'hidden-mobile' : ''}`}>
+          {isMobile && showMobileStrategy && (
+            <div className="mobile-strategy-header">
+              <button 
+                className="back-button"
+                onClick={() => setShowMobileStrategy(false)}
+              >
+                ← Back to Narratives
+              </button>
+            </div>
+          )}
+          
           <div className="counter-header">
             <h2 className="counter-title">Counter-Narrative Generator</h2>
           </div>
+          
           <div className="counter-content">
             {selectedNarrative ? (
               <div className="strategy-content">

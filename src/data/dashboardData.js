@@ -66,3 +66,20 @@ export const dashboardData = {
       { platform: 'Tamil News', percentage: 0 }
     ]
   };
+  
+  // Real-time data simulation
+  export const generateLiveData = () => {
+    const variance = () => (Math.random() - 0.5) * 0.2;
+    
+    return {
+      ...dashboardData,
+      overallSentimentData: dashboardData.overallSentimentData.map(item => ({
+        ...item,
+        value: Math.max(0, item.value + variance())
+      })),
+      politicalImpactData: dashboardData.politicalImpactData.map(item => ({
+        ...item,
+        score: Math.max(0, Math.min(10, item.score + variance()))
+      }))
+    };
+  };

@@ -5,7 +5,9 @@ export const narrativesData = [
       title: 'Complete absence of AIADMK voice on Twitter platform',
       source: 'Platform Analytics • Real-time',
       sentiment: 'Very Negative',
-      impressions: '0 positive in 41 posts'
+      impressions: '0 positive in 41 posts',
+      priority: 'urgent',
+      lastUpdated: '2 hours ago'
     },
     {
       id: 'opposition_viral',
@@ -13,7 +15,9 @@ export const narrativesData = [
       title: 'Opposition criticism achieving highest engagement rates',
       source: 'Content Analysis • Last 24h',
       sentiment: 'Very Negative',
-      impressions: '31% negative, 9.2 engagement rate'
+      impressions: '31% negative, 9.2 engagement rate',
+      priority: 'high',
+      lastUpdated: '30 minutes ago'
     },
     {
       id: 'neutral_apathy',
@@ -21,7 +25,9 @@ export const narrativesData = [
       title: 'Massive voter apathy with 90% neutral sentiment',
       source: 'Sentiment Analysis • Ongoing',
       sentiment: 'Negative',
-      impressions: '90% neutral across 470 pieces'
+      impressions: '90% neutral across 470 pieces',
+      priority: 'high',
+      lastUpdated: '1 hour ago'
     },
     {
       id: 'leadership_attacks',
@@ -29,7 +35,9 @@ export const narrativesData = [
       title: 'Character attacks on EPS leadership gaining traction',
       source: 'Social Media Monitoring • 6h ago',
       sentiment: 'Very Negative',
-      impressions: '12% negative vs 15% positive'
+      impressions: '12% negative vs 15% positive',
+      priority: 'medium',
+      lastUpdated: '6 hours ago'
     },
     {
       id: 'policy_criticism',
@@ -37,7 +45,9 @@ export const narrativesData = [
       title: 'Policy announcements getting low engagement',
       source: 'Digital Platforms • 4h ago',
       sentiment: 'Negative',
-      impressions: '8% negative, low virality 2.7'
+      impressions: '8% negative, low virality 2.7',
+      priority: 'medium',
+      lastUpdated: '4 hours ago'
     },
     {
       id: 'alliance_doubts',
@@ -45,7 +55,9 @@ export const narrativesData = [
       title: 'Questions about BJP-AIADMK alliance coordination',
       source: 'Regional Tamil Media • 8h ago',
       sentiment: 'Negative',
-      impressions: '5% negative in alliance content'
+      impressions: '5% negative in alliance content',
+      priority: 'low',
+      lastUpdated: '8 hours ago'
     },
     {
       id: 'dmk_counter_narrative',
@@ -53,7 +65,9 @@ export const narrativesData = [
       title: 'DMK spreading counter-narratives on development projects',
       source: 'Tamil News Websites • 3h ago',
       sentiment: 'Very Negative',
-      impressions: 'High traction on Tamil platforms'
+      impressions: 'High traction on Tamil platforms',
+      priority: 'high',
+      lastUpdated: '3 hours ago'
     },
     {
       id: 'youth_disconnect',
@@ -61,7 +75,9 @@ export const narrativesData = [
       title: 'Young voters showing disconnect from AIADMK messaging',
       source: 'Instagram Analytics • 12h ago',
       sentiment: 'Negative',
-      impressions: 'Only 5% positive on Instagram'
+      impressions: 'Only 5% positive on Instagram',
+      priority: 'medium',
+      lastUpdated: '12 hours ago'
     }
   ];
   
@@ -70,6 +86,9 @@ export const narrativesData = [
       title: "Twitter Activation Emergency Strategy",
       subtitle: "Deploy immediate Twitter presence using proven YouTube success model",
       confidence: "URGENT - Twitter 0% vs YouTube 25% positive",
+      priority: "urgent",
+      estimatedImpact: "High",
+      timeframe: "24-48 hours",
       points: [
         "Launch Twitter campaign leveraging YouTube's 25% positive success rate",
         "Deploy MGR legacy content optimized for Twitter hashtags and format",
@@ -83,6 +102,9 @@ export const narrativesData = [
       title: "Counter-Viral Content Deployment",
       subtitle: "Combat opposition's 9.2 engagement rate with superior positive content",
       confidence: "HIGH PRIORITY - Opposition outperforming with 31% negative",
+      priority: "high",
+      estimatedImpact: "Very High",
+      timeframe: "12-24 hours",
       points: [
         "Deploy historical references content (8.1 engagement, 6.3 virality score)",
         "Leverage alliance updates strategy (6.8 engagement, 18% positive sentiment)",
@@ -96,6 +118,9 @@ export const narrativesData = [
       title: "Voter Activation Mega Campaign",
       subtitle: "Convert 90% neutral sentiment through targeted engagement strategy",
       confidence: "CRITICAL - 90% neutral indicates massive opportunity",
+      priority: "high",
+      estimatedImpact: "Very High",
+      timeframe: "1-2 weeks",
       points: [
         "Launch YouTube-first engagement campaign (best performing platform)",
         "Deploy alliance benefits messaging to activate dormant voters",
@@ -109,6 +134,9 @@ export const narrativesData = [
       title: "EPS Leadership Defense Strategy",
       subtitle: "Counter character attacks with positive leadership narrative",
       confidence: "MEDIUM-HIGH - 15% positive vs 12% negative currently",
+      priority: "medium",
+      estimatedImpact: "High",
+      timeframe: "3-5 days",
       points: [
         "Amplify EPS positive leadership mentions using proven content types",
         "Deploy BJP alliance as testament to national leadership recognition",
@@ -122,6 +150,9 @@ export const narrativesData = [
       title: "Policy Communication Enhancement",
       subtitle: "Boost policy engagement using alliance success narrative",
       confidence: "MEDIUM - 21% positive but low virality 2.7",
+      priority: "medium",
+      estimatedImpact: "Medium",
+      timeframe: "1 week",
       points: [
         "Reframe policy announcements through BJP alliance success lens",
         "Deploy policy content during peak engagement hours for better reach",
@@ -135,6 +166,9 @@ export const narrativesData = [
       title: "Alliance Success Showcase Strategy",
       subtitle: "Highlight BJP-AIADMK alliance benefits and coordination",
       confidence: "HIGH - Alliance content shows 18% positive sentiment",
+      priority: "low",
+      estimatedImpact: "Medium",
+      timeframe: "2-3 days",
       points: [
         "Showcase alliance achievements and central government benefits",
         "Deploy alliance content during peak hours for maximum visibility",
@@ -148,6 +182,9 @@ export const narrativesData = [
       title: "DMK Counter-Narrative Strategy",
       subtitle: "Deploy anti-DMK positioning with development achievements",
       confidence: "HIGH - Anti-DMK positioning is key impact driver",
+      priority: "high",
+      estimatedImpact: "High",
+      timeframe: "24-48 hours",
       points: [
         "Deploy development project successes to counter DMK narratives",
         "Use regional Tamil media for direct counter-messaging",
@@ -161,6 +198,9 @@ export const narrativesData = [
       title: "Youth Re-engagement Strategy",
       subtitle: "Connect with young voters through modern platform optimization",
       confidence: "MEDIUM - Instagram shows 5% positive, needs improvement",
+      priority: "medium",
+      estimatedImpact: "Medium",
+      timeframe: "1-2 weeks",
       points: [
         "Optimize Instagram content using YouTube's successful engagement model",
         "Deploy youth-focused alliance benefits and employment opportunities",
